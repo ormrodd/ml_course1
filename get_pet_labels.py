@@ -39,6 +39,7 @@ def get_pet_labels(image_dir):
     # is the filename and the value is the picture label (below).
  
     # Creates empty dictionary for the results (pet labels, etc.)
+    pet_labels = []
     results_dic = dict()
    
     # Processes through each file in the directory, extracting only the words
@@ -67,15 +68,17 @@ def get_pet_labels(image_dir):
                pet_label = pet_label.replace(".jpg", "")
                pet_label = pet_label.rstrip()
 
+           print('Filename = ', in_files[idx], '    label = ', pet_label)
            # If filename doesn't already exist in dictionary add it and it's
            # pet label - otherwise print an error message because indicates 
            # duplicate files (filenames)
            if in_files[idx] not in results_dic:
               results_dic[in_files[idx]] = [pet_label]
+              print("not in list",pet_label)
+              print(results_dic)
               
            else:
-               print("** Warning: Duplicate files exist in directory:", 
-                     in_files[idx])
+               print("** Warning: Duplicate files exist in directory:", in_files[idx])
  
     # TODO 2b. Replace None with the results_dic dictionary that you created
     # with this function

@@ -70,7 +70,7 @@ def classify_images(images_dir, results_dic, model):
     # that indicates the folder and the filename (key) to be used in the 
     # classifier function
     for key in results_dic:
-       
+       model_label = ""
        # TODO: 3a. Set the string variable model_label to be the string that's 
        #           returned from using the classifier function instead of the   
        #           empty string below.
@@ -78,7 +78,7 @@ def classify_images(images_dir, results_dic, model):
        #  Runs classifier function to classify the images classifier function 
        # inputs: path + filename  and  model, returns model_label 
        # as classifier label
-       model_label = classifier(images_dir+key,model)
+       model_label = classifier(images_dir+'/'+key,model)
 
        # TODO: 3b. BELOW REPLACE pass with CODE to process the model_label to 
        #           convert all characters within model_label to lowercase 
@@ -90,7 +90,7 @@ def classify_images(images_dir, results_dic, model):
        # set labels to lowercase (lower) and stripping off whitespace(strip)
        model_label = model_label.lower()
        model_label = model_label.rstrip()
-              
+             
        # defines truth as pet image label 
        truth = results_dic[key][0]
 
@@ -103,10 +103,12 @@ def classify_images(images_dir, results_dic, model):
        # If the pet image label is found within the classifier label list of terms 
        # as an exact match to on of the terms in the list - then they are added to 
        # results_dic as an exact match(1) using extend list function
-       
-       print(results_dic.values()) 
+      
+        
+        # Classifier Label
        if truth in model_label:
-            results_dic[key][0].extend(([model_label],[1]))
+           results_dic[key].extend((model_label,1))
+        
        
 
        # TODO: 3d. REPLACE pass BELOW with CODE that uses the extend list function
@@ -117,5 +119,7 @@ def classify_images(images_dir, results_dic, model):
        #                   
        # if not found then added to results dictionary as NOT a match(0) using
        # the extend function 
+       
+        # Add the results to the results dictionary (results_dic).
        else:
-           results_dic[key][0].extend(({model_label,0}))
+           results_dic[key].extend((model_label,0))
